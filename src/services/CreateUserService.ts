@@ -1,4 +1,4 @@
-import { UsersRepository } from "../repositories/UsersRepository";
+import { IUsersRepository } from "../repositories/Users/IUsersRepository";
 
 interface IRequest {
   name: string;
@@ -6,7 +6,7 @@ interface IRequest {
 }
 
 export class CreateUserService {
-  constructor(private usersRepository: UsersRepository) {}
+  constructor(private usersRepository: IUsersRepository) {}
 
   execute({ name, cpf }: IRequest) {
     const foundUserByCPF = this.usersRepository.findByCPF(cpf);
