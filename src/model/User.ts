@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 import { ICreateUserDTO } from "../repositories/Users/IUsersRepository";
 
-class User {
+export class User {
   id?: string;
   name: string;
   cpf: string;
@@ -14,5 +14,3 @@ class User {
     this.createdAt = new Date();
   }
 }
-
-export { User };

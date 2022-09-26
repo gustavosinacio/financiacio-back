@@ -10,7 +10,6 @@ export class UsersRepository implements IUsersRepository {
 
   create({ name, cpf }: ICreateUserDTO) {
     const user = new User({ name, cpf });
-
     this.users.push(user);
   }
 
