@@ -1,17 +1,29 @@
-import express, { Request, Response, Router } from "express";
+import express, { NextFunction, Request, Response } from "express";
+
+// import { transactionsRouter } from "./routes/transactions";
+import { usersRouter } from "./routes/users.routes";
 
 const app = express();
 const port = 3333;
 
-const route = Router();
-
 app.use(express.json());
 
-route.get("/", (req: Request, res: Response) => {
-  res.json({ message: "Financiacio V1" });
+app.use((req: Request, res: Response, next: NextFunction) => {
+  console.log("*---*", req.method, req.url);
+
+  next();
 });
 
-app.use(route);
+// ? Routes --------------------------------------------------------------------
+
+// app.use("/api/transactions", transactionsRouter);
+app.use("/api/users", usersRouter);
+
+// ? ---------------------------------------------------------------------------
+
+app.get("/api", (req: Request, res: Response) => {
+  return res.json({ message: "Financiacio V1" });
+});
 
 app.listen(port, () => {
   console.log(`---- Server running on port ${port} ----`);
