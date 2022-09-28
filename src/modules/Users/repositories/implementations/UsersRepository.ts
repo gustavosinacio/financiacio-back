@@ -1,5 +1,5 @@
-import { User } from "../models/User";
-import { ICreateUserDTO, IUsersRepository } from "./IUsersRepository";
+import { User } from "../../models/User";
+import { ICreateUserDTO, IUsersRepository } from "../IUsersRepository";
 
 export class UsersRepository implements IUsersRepository {
   private users: User[];

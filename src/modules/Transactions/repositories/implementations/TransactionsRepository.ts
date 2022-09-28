@@ -1,8 +1,8 @@
-import { Transaction } from "../models/Transaction";
+import { Transaction } from "../../models/Transaction";
 import {
   ICreateTransactionDTO,
   ITransactionsRepository,
-} from "./ITransactionsRepository";
+} from "../ITransactionsRepository";
 
 export class TransactionsRepository implements ITransactionsRepository {
   private transactions: Transaction[];

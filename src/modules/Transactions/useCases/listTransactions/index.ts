@@ -1,4 +1,4 @@
-import { TransactionsRepository } from "../../repositories/TransactionsRepository";
+import { TransactionsRepository } from "../../repositories/implementations/TransactionsRepository";
 import { ListTransactionsUseCase } from "./ListTransactionsUseCase";
 import { ListTransactionsController } from "./ListTransactionsController";
 
