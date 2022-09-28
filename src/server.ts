@@ -1,4 +1,5 @@
 import express, { NextFunction, Request, Response } from "express";
+import { transactionsRouter } from "./routes/transactions.routes";
 
 // import { transactionsRouter } from "./routes/transactions";
 import { usersRouter } from "./routes/users.routes";
@@ -14,10 +15,10 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   next();
 });
 
-// ? Routes --------------------------------------------------------------------
+// ? ---------------------------------------------------------------------------
 
-// app.use("/api/transactions", transactionsRouter);
 app.use("/api/users", usersRouter);
+app.use("/api/transactions", transactionsRouter);
 
 // ? ---------------------------------------------------------------------------
 

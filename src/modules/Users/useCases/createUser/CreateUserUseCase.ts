@@ -1,14 +1,15 @@
-import { IUsersRepository } from "../repositories/Users/IUsersRepository";
+import { IUsersRepository } from "../../repositories/IUsersRepository";
 
-interface IRequest {
+interface ICreateUserRequest {
+  id?: string;
   name: string;
   cpf: string;
 }
 
-export class CreateUserService {
+export class CreateUserUseCase {
   constructor(private usersRepository: IUsersRepository) {}
 
-  execute({ name, cpf }: IRequest) {
+  execute({ name, cpf }: ICreateUserRequest): void {
     const foundUserByCPF = this.usersRepository.findByCPF(cpf);
 
     if (foundUserByCPF) {

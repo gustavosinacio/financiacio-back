@@ -1,8 +1,8 @@
 import { v4 as uuidv4 } from "uuid";
-import { ICreateUserDTO } from "../repositories/Users/IUsersRepository";
+import { ICreateUserDTO } from "../repositories/IUsersRepository";
 
 export class User {
-  id?: string;
+  id: string;
   name: string;
   cpf: string;
   createdAt: Date;
