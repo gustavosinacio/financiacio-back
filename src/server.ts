@@ -1,8 +1,6 @@
 import express, { NextFunction, Request, Response } from "express";
-import { transactionsRouter } from "./routes/transactions.routes";
 
-// import { transactionsRouter } from "./routes/transactions";
-import { usersRouter } from "./routes/users.routes";
+import { routes } from "./routes";
 
 const app = express();
 const port = 3333;
@@ -15,16 +13,11 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   next();
 });
 
-// ? ---------------------------------------------------------------------------
-
-app.use("/api/users", usersRouter);
-app.use("/api/transactions", transactionsRouter);
-
-// ? ---------------------------------------------------------------------------
-
 app.get("/api", (req: Request, res: Response) => {
   return res.json({ message: "Financiacio V1" });
 });
+
+app.use(routes);
 
 app.listen(port, () => {
   console.log(`---- Server running on port ${port} ----`);

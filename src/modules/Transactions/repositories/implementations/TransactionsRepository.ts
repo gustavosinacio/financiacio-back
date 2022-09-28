@@ -20,8 +20,8 @@ export class TransactionsRepository implements ITransactionsRepository {
     return TransactionsRepository.INSTANCE;
   }
 
-  create({ description, amount, userId }: ICreateTransactionDTO): void {
-    const transaction = new Transaction({ description, amount, userId });
+  create({ description, amount }: ICreateTransactionDTO): void {
+    const transaction = new Transaction({ description, amount });
     this.transactions.push(transaction);
   }
   list(): Transaction[] {

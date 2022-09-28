@@ -5,10 +5,9 @@ export class CreateTransactionController {
   constructor(private createTransactionUseCase: CreateTransactionUseCase) {}
 
   handle(req: Request, res: Response) {
-    const { userId, amount, description } = req.body;
+    const { amount, description } = req.body;
 
     this.createTransactionUseCase.execute({
-      userId,
       amount,
       description,
     });
