@@ -1,4 +1,7 @@
 import express, { NextFunction, Request, Response } from "express";
+import swaggerUi from "swagger-ui-express";
+
+import swaggerSetup from "./swagger.json";
 
 import { routes } from "./routes";
 
@@ -7,14 +10,11 @@ const port = 3333;
 
 app.use(express.json());
 
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSetup));
+
 app.use((req: Request, res: Response, next: NextFunction) => {
   console.log("*---*", req.method, req.url);
-
   next();
-});
-
-app.get("/api", (req: Request, res: Response) => {
-  return res.json({ message: "Financiacio V1" });
 });
 
 app.use(routes);

@@ -5,7 +5,7 @@ import { usersRouter } from "./users.routes";
 
 const routes = Router();
 
-routes.use("/api/users", usersRouter);
-routes.use("/api/transactions", transactionsRouter);
+routes.use("/users", usersRouter);
+routes.use("/transactions", transactionsRouter);
 
 export { routes };

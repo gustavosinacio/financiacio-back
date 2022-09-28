@@ -5,8 +5,10 @@ import { ITransactionsRepository } from "../../repositories/ITransactionsReposit
 
 interface IImportTransaction {
   description: string;
-  amount: number;
+  amount: string;
 }
+
+const LINE_OFFSET = 1;
 
 export class ImportTransactionsUseCase {
   constructor(private transactionsRepository: ITransactionsRepository) {}
@@ -26,6 +28,7 @@ export class ImportTransactionsUseCase {
           transactions.push({ description, amount });
         })
         .on("end", () => {
+          fs.promises.unlink(file.path);
           resolve(transactions);
         })
         .on("error", (error) => {
@@ -37,11 +40,17 @@ export class ImportTransactionsUseCase {
   async execute(file: Express.Multer.File): Promise<void> {
     const transactions = await this.loadTransactions(file);
 
-    console.log(9821, transactions);
-
-    transactions.forEach((transaction) => {
+    transactions.forEach((transaction, lineNumber) => {
       const { amount, description } = transaction;
-      this.transactionsRepository.create({ amount, description });
+
+      const parsedAmount = parseFloat(amount);
+
+      if (isNaN(parsedAmount)) {
+        throw new Error(
+          `unable to parse amount on line ${lineNumber + LINE_OFFSET}`
+        );
+      }
+      this.transactionsRepository.create({ amount: parsedAmount, description });
     });
   }
 }
