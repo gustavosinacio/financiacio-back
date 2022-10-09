@@ -5,9 +5,9 @@ export class CreateUserController {
   constructor(private createUserUseCase: CreateUserUseCase) {}
 
   handle(req: Request, res: Response): Response {
-    const { name, cpf } = req.body;
+    const { name, email, cpf } = req.body;
 
-    this.createUserUseCase.execute({ name, cpf });
+    this.createUserUseCase.execute({ name, email, cpf });
 
     return res.status(201).send();
   }

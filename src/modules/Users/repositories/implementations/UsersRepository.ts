@@ -17,8 +17,8 @@ export class UsersRepository implements IUsersRepository {
     return UsersRepository.INSTANCE;
   }
 
-  create({ name, cpf }: ICreateUserDTO): void {
-    const user = new User({ name, cpf });
+  create({ name, email, cpf }: ICreateUserDTO): void {
+    const user = new User({ name, email, cpf });
     this.users.push(user);
   }
 
