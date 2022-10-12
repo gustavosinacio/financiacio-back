@@ -14,7 +14,7 @@ export class CreateUserUseCase {
     const foundUserByCPF = this.usersRepository.findByCPF(cpf);
 
     if (foundUserByCPF) {
-      throw new Error("User already exists");
+      throw new Error("CPF already exists");
     }
 
     this.usersRepository.create({ name, email, cpf });
