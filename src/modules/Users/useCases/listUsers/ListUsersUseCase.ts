@@ -1,10 +1,10 @@
-import { User } from "../../models/User";
-import { IUsersRepository } from "../../repositories/IUsersRepository";
+import { User } from '../../entities/User';
+import { IUsersRepository } from '../../repositories/IUsersRepository';
 
 export class ListUsersUseCase {
   constructor(private usersRepository: IUsersRepository) {}
 
-  execute(): User[] {
-    return this.usersRepository.list();
+  async execute(): Promise<User[]> {
+    return await this.usersRepository.list();
   }
 }

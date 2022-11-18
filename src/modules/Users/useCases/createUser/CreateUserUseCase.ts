@@ -1,4 +1,4 @@
-import { IUsersRepository } from "../../repositories/IUsersRepository";
+import { IUsersRepository } from '../../repositories/IUsersRepository';
 
 interface ICreateUserRequest {
   id?: string;
@@ -10,8 +10,8 @@ interface ICreateUserRequest {
 export class CreateUserUseCase {
   constructor(private usersRepository: IUsersRepository) {}
 
-  execute({ name, email, cpf }: ICreateUserRequest): void {
-    const foundUserByCPF = this.usersRepository.findByCPF(cpf);
+  async execute({ name, email, cpf }: ICreateUserRequest): Promise<void> {
+    const foundUserByCPF = await this.usersRepository.findByCPF(cpf);
 
     if (foundUserByCPF) {
       throw new Error("CPF already exists");

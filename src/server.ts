@@ -1,13 +1,14 @@
-import './database';
-
 import express, { NextFunction, Request, Response } from 'express';
 import swaggerUi from 'swagger-ui-express';
 
+import { AppDataSource } from './database';
 import { routes } from './routes';
 import swaggerSetup from './swagger.json';
 
 const app = express();
 const port = 3333;
+
+AppDataSource.initialize();
 
 app.use(express.json());
 

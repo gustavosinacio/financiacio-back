@@ -1,4 +1,4 @@
-import { User } from "../models/User";
+import { User } from '../entities/User';
 
 export interface ICreateUserDTO {
   name: string;
@@ -7,7 +7,7 @@ export interface ICreateUserDTO {
 }
 
 export interface IUsersRepository {
-  create({ name, email, cpf }: ICreateUserDTO): void;
-  list(): User[];
-  findByCPF(cpf: string): User | undefined;
+  create({ name, email, cpf }: ICreateUserDTO): Promise<void>;
+  list(): Promise<User[]>;
+  findByCPF(cpf: string): Promise<User | undefined>;
 }

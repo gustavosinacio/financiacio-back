@@ -1,32 +1,31 @@
-import { User } from "../../models/User";
-import { ICreateUserDTO, IUsersRepository } from "../IUsersRepository";
+import { Repository } from 'typeorm';
+
+import { AppDataSource } from '../../../../database';
+import { User } from '../../entities/User';
+import { ICreateUserDTO, IUsersRepository } from '../IUsersRepository';
 
 export class UsersRepository implements IUsersRepository {
-  private users: User[];
+  private repository: Repository<User>;
 
-  private static INSTANCE: UsersRepository;
-
-  private constructor() {
-    this.users = [];
+  constructor() {
+    this.repository = AppDataSource.getRepository(User);
   }
 
-  public static getInstance(): UsersRepository {
-    if (!UsersRepository.INSTANCE) {
-      UsersRepository.INSTANCE = new UsersRepository();
-    }
-    return UsersRepository.INSTANCE;
+  async create({ name, email, cpf }: ICreateUserDTO): Promise<void> {
+    const User = this.repository.create({
+      name,
+      email,
+      cpf,
+    });
+
+    await this.repository.save(User);
   }
 
-  create({ name, email, cpf }: ICreateUserDTO): void {
-    const user = new User({ name, email, cpf });
-    this.users.push(user);
+  async list(): Promise<User[]> {
+    return await this.repository.find();
   }
 
-  list(): User[] {
-    return this.users;
-  }
-
-  findByCPF(cpf: string): User {
-    return this.users.find((user) => user.cpf === cpf);
+  async findByCPF(cpf: string): Promise<User> {
+    return await this.repository.findOne({ where: { cpf } });
   }
 }

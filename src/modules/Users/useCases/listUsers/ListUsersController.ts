@@ -1,10 +1,11 @@
-import { Request, Response } from "express";
-import { ListUsersUseCase } from "./ListUsersUseCase";
+import { Request, Response } from 'express';
+
+import { ListUsersUseCase } from './ListUsersUseCase';
 
 export class ListUsersController {
   constructor(private listUserUseCase: ListUsersUseCase) {}
 
-  handle(req: Request, res: Response): Response {
-    return res.json(this.listUserUseCase.execute());
+  async handle(req: Request, res: Response): Promise<Response> {
+    return res.json(await this.listUserUseCase.execute());
   }
 }
