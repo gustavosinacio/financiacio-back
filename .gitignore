@@ -1,4 +1,7 @@
-node_modules
+.vscode/settings*
+node_modules/
+tmp/
+temp/
 dist
 tmp
 *.csv
