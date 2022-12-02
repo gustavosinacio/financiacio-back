@@ -1,4 +1,4 @@
-import { ITransactionsRepository } from "../../repositories/ITransactionsRepository";
+import { ITransactionsRepository } from '../../repositories/ITransactionsRepository';
 
 interface ICreateTransactionRequest {
   description: string;
@@ -8,7 +8,10 @@ interface ICreateTransactionRequest {
 export class CreateTransactionUseCase {
   constructor(private transactionsRepository: ITransactionsRepository) {}
 
-  execute({ description, amount }: ICreateTransactionRequest): void {
+  async execute({
+    description,
+    amount,
+  }: ICreateTransactionRequest): Promise<void> {
     this.transactionsRepository.create({ description, amount });
   }
 }

@@ -1,10 +1,14 @@
-import { Repository } from "typeorm";
+import { AppDataSource } from 'src/database';
 
-import { AppDataSource } from "../../../../database";
-import { User } from "../../entities/User";
-import { ICreateUserDTO, IUsersRepository } from "../IUsersRepository";
+import { Repository } from 'typeorm';
+import { User } from '../../entities/User';
+import { ICreateUserDTO, IUsersRepository } from '../IUsersRepository';
+import { v4 as uuidv4 } from 'uuid';
 
 export class UsersRepository implements IUsersRepository {
+  /**
+   * The repository variable can only be used inside my implementation
+   *  */
   private repository: Repository<User>;
 
   constructor() {
@@ -12,7 +16,8 @@ export class UsersRepository implements IUsersRepository {
   }
 
   async create({ name, email, cpf }: ICreateUserDTO): Promise<void> {
-    const user = new User({
+    const user = this.repository.create({
+      id: uuidv4(),
       name,
       email,
       cpf,
@@ -26,6 +31,10 @@ export class UsersRepository implements IUsersRepository {
   }
 
   async findByCPF(cpf: string): Promise<User> {
-    return await this.repository.findOne({ where: { cpf } });
+    return this.repository.findOne({ where: { cpf } });
+  }
+
+  async findByEmail(email: string): Promise<User> {
+    return this.repository.findOne({ where: { email } });
   }
 }

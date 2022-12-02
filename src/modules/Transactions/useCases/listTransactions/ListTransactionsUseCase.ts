@@ -1,10 +1,10 @@
-import { Transaction } from "../../models/Transaction";
-import { ITransactionsRepository } from "../../repositories/ITransactionsRepository";
+import { Transaction } from '../../entities/Transaction';
+import { ITransactionsRepository } from '../../repositories/ITransactionsRepository';
 
 export class ListTransactionsUseCase {
   constructor(private transactionsRepository: ITransactionsRepository) {}
 
-  execute(): Transaction[] {
-    return this.transactionsRepository.list();
+  async execute(): Promise<Transaction[]> {
+    return await this.transactionsRepository.list();
   }
 }

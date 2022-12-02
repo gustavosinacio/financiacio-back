@@ -27,16 +27,16 @@ export class User {
   @CreateDateColumn()
   createdAt: Date;
 
-  constructor(createUserInfo: ICreateUserDTO) {
+  constructor(createUserData: ICreateUserDTO) {
     /**
      * This check is being performed due to typeorm running the constructor on
      * server start. If not present, the error of
      * "Cannot destructure property 'name' of 'undefined' as it is undefined"
      * will show up on start
      */
-    if (createUserInfo === undefined) return;
+    if (createUserData === undefined) return;
 
-    const { name, email, cpf } = createUserInfo;
+    const { name, email, cpf } = createUserData;
     if (!this.id) this.id = uuidv4();
     this.name = name;
     this.email = email;

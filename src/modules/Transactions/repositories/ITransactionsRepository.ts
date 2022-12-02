@@ -1,4 +1,4 @@
-import { Transaction } from "../models/Transaction";
+import { Transaction } from '../entities/Transaction';
 
 export interface ICreateTransactionDTO {
   description: string;
@@ -6,7 +6,7 @@ export interface ICreateTransactionDTO {
 }
 
 export interface ITransactionsRepository {
-  create({ description, amount }: ICreateTransactionDTO): void;
-  list(): Transaction[];
-  findById(id: string): Transaction | undefined;
+  create({ description, amount }: ICreateTransactionDTO): Promise<void>;
+  list(): Promise<Transaction[]>;
+  findById(id: string): Promise<Transaction>;
 }

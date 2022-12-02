@@ -1,33 +1,32 @@
-import { Transaction } from "../../models/Transaction";
+import { AppDataSource } from 'src/database';
+import { Repository } from 'typeorm';
 import {
   ICreateTransactionDTO,
   ITransactionsRepository,
-} from "../ITransactionsRepository";
+} from '../ITransactionsRepository';
+
+import { Transaction } from '../../entities/Transaction';
+import { v4 as uuidv4 } from 'uuid';
 
 export class TransactionsRepository implements ITransactionsRepository {
-  private transactions: Transaction[];
-
-  private static INSTANCE: TransactionsRepository;
+  private repository: Repository<Transaction>;
 
   constructor() {
-    this.transactions = [];
+    this.repository = AppDataSource.getRepository(Transaction);
   }
 
-  public static getInstance(): TransactionsRepository {
-    if (!TransactionsRepository.INSTANCE) {
-      TransactionsRepository.INSTANCE = new TransactionsRepository();
-    }
-    return TransactionsRepository.INSTANCE;
+  async create({ description, amount }: ICreateTransactionDTO): Promise<void> {
+    const transaction = this.repository.create({
+      id: uuidv4(),
+      description,
+      amount,
+    });
+    await this.repository.save(transaction);
   }
-
-  create({ description, amount }: ICreateTransactionDTO): void {
-    const transaction = new Transaction({ description, amount });
-    this.transactions.push(transaction);
+  async list(): Promise<Transaction[]> {
+    return await this.repository.find();
   }
-  list(): Transaction[] {
-    return this.transactions;
-  }
-  findById(id: string): Transaction {
-    return this.transactions.find((transaction) => transaction.id === id);
+  async findById(id: string): Promise<Transaction> {
+    return this.repository.findOne({ where: { id } });
   }
 }

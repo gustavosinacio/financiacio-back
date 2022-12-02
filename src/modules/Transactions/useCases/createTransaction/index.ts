@@ -1,14 +1,16 @@
-import { CreateTransactionUseCase } from "./CreateTransactionUseCase";
-import { CreateTransactionController } from "./CreateTransactionController";
-import { TransactionsRepository } from "../../repositories/implementations/TransactionsRepository";
+import { CreateTransactionUseCase } from './CreateTransactionUseCase';
+import { CreateTransactionController } from './CreateTransactionController';
+import { TransactionsRepository } from '../../repositories/implementations/TransactionsRepository';
 
-const transactionsRepository = TransactionsRepository.getInstance();
+export default (): CreateTransactionController => {
+  const transactionsRepository = new TransactionsRepository();
 
-const createTransactionUseCase = new CreateTransactionUseCase(
-  transactionsRepository
-);
-const createTransactionController = new CreateTransactionController(
-  createTransactionUseCase
-);
+  const createTransactionUseCase = new CreateTransactionUseCase(
+    transactionsRepository,
+  );
+  const createTransactionController = new CreateTransactionController(
+    createTransactionUseCase,
+  );
 
-export { createTransactionController };
+  return createTransactionController;
+};

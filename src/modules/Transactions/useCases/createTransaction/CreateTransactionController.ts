@@ -1,13 +1,13 @@
-import { Request, Response } from "express";
-import { CreateTransactionUseCase } from "./CreateTransactionUseCase";
+import { Request, Response } from 'express';
+import { CreateTransactionUseCase } from './CreateTransactionUseCase';
 
 export class CreateTransactionController {
   constructor(private createTransactionUseCase: CreateTransactionUseCase) {}
 
-  handle(req: Request, res: Response) {
+  async handle(req: Request, res: Response): Promise<Response> {
     const { amount, description } = req.body;
 
-    this.createTransactionUseCase.execute({
+    await this.createTransactionUseCase.execute({
       amount,
       description,
     });

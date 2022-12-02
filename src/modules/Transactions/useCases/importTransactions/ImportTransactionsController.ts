@@ -1,13 +1,13 @@
-import { Request, Response } from "express";
-import { ImportTransactionsUseCase } from "./ImportTransactionsUseCase";
+import { Request, Response } from 'express';
+import { ImportTransactionsUseCase } from './ImportTransactionsUseCase';
 
 export class ImportTransactionsController {
   constructor(private importTransactionsUseCase: ImportTransactionsUseCase) {}
 
-  handle(req: Request, res: Response): Response {
+  async handle(req: Request, res: Response): Promise<Response> {
     const { file } = req;
 
-    this.importTransactionsUseCase.execute(file);
+    await this.importTransactionsUseCase.execute(file);
 
     return res.send();
   }
