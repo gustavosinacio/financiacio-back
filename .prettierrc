@@ -3,13 +3,5 @@
   "tabWidth": 2,
   "trailingComma": "all",
   "singleQuote": true,
-  "semi": true,
-  "importOrder": [
-    "^src/routes/(.*)$",
-    "^src/modules/(.*)$",
-    "^src/database/(.*)$",
-    "^[./]"
-  ],
-  "importOrderSeparation": true,
-  "importOrderSortSpecifiers": true
+  "semi": true
 }

@@ -1,4 +1,4 @@
-version: "3.9"
+version: '3.9'
 
 services:
   database:
@@ -17,16 +17,15 @@ services:
   app:
     build: .
     container_name: financiacio-api
-    ports: 
+    ports:
       - 3333:3333
       - 9229:9229
-    volumes: 
+    volumes:
       - .:/usr/app
     links:
       - database
-    depends_on: 
+    depends_on:
       - database
-      
 
 volumes:
   pgdata:

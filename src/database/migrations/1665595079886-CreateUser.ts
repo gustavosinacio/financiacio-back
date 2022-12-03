@@ -4,36 +4,36 @@ export class CreateUser1665595079886 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: "users",
+        name: 'users',
         columns: [
           {
-            name: "id",
-            type: "uuid",
+            name: 'id',
+            type: 'uuid',
             isPrimary: true,
           },
           {
-            name: "name",
-            type: "varchar",
+            name: 'name',
+            type: 'varchar',
           },
           {
-            name: "email",
-            type: "varchar",
+            name: 'email',
+            type: 'varchar',
           },
           {
-            name: "cpf",
-            type: "varchar",
+            name: 'cpf',
+            type: 'varchar',
           },
           {
-            name: "createdAt",
-            type: "timestamp",
-            default: "now()",
+            name: 'createdAt',
+            type: 'timestamp',
+            default: 'now()',
           },
         ],
-      })
+      }),
     );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable("users");
+    await queryRunner.dropTable('users');
   }
 }
