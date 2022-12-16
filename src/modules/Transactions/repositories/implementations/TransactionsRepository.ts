@@ -2,8 +2,9 @@ import { AppDataSource } from 'src/database';
 import { Repository } from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
 
+import { ICreateTransactionDTO } from '../../dtos';
 import { Transaction } from '../../entities/Transaction';
-import { ICreateTransactionDTO, ITransactionsRepository } from '../ITransactionsRepository';
+import { ITransactionsRepository } from '../ITransactionsRepository';
 
 export class TransactionsRepository implements ITransactionsRepository {
   private repository: Repository<Transaction>;

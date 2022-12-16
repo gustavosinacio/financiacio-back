@@ -7,6 +7,10 @@ interface ICreateTransactionRequest {
   amount: number;
 }
 
+/**
+ * This use case has been created as injectable, so I can use it on
+ * container.resolve()
+ */
 @injectable()
 export class CreateTransactionUseCase {
   constructor(

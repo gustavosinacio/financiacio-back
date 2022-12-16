@@ -2,8 +2,9 @@ import { AppDataSource } from 'src/database';
 import { Repository } from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
 
+import { ICreateUserDTO } from '../../dtos/ICreateUserDto';
 import { User } from '../../entities/User';
-import { ICreateUserDTO, IUsersRepository } from '../IUsersRepository';
+import { IUsersRepository } from '../IUsersRepository';
 
 export class UsersRepository implements IUsersRepository {
   /**

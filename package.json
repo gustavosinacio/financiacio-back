@@ -10,7 +10,8 @@
     "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules -r tsconfig-paths/register src/server.ts",
     "build": "tsc",
     "start": "ts-node src/index.ts",
-    "typeorm": "typeorm-ts-node-commonjs -d src/database"
+    "typeorm": "typeorm-ts-node-commonjs -d src/database",
+    "typeorm:migration:create": "typeorm-ts-node-commonjs migration:create"
   },
   "dependencies": {
     "csv-parse": "^5.3.0",
