@@ -16,26 +16,39 @@ export class UsersRepository implements IUsersRepository {
     this.repository = AppDataSource.getRepository(User);
   }
   // ---------------------------------------------------------------------------
-  async create({ name, email, cpf }: ICreateUserDTO): Promise<void> {
+  async create({ name, email, cpf, password }: ICreateUserDTO): Promise<void> {
     const user = this.repository.create({
       id: uuidv4(),
       name,
       email,
       cpf,
+      password,
     });
 
     await this.repository.save(user);
   }
   // ---------------------------------------------------------------------------
   async list(): Promise<User[]> {
-    return await this.repository.find();
+    return await this.repository.find({
+      order: {
+        createdAt: { direction: 'DESC' },
+      },
+    });
   }
   // ---------------------------------------------------------------------------
   async findByCPF(cpf: string): Promise<User> {
-    return this.repository.findOne({ where: { cpf } });
+    return await this.repository.findOne({ where: { cpf } });
   }
   // ---------------------------------------------------------------------------
   async findByEmail(email: string): Promise<User> {
-    return this.repository.findOne({ where: { email } });
+    return await this.repository.findOne({ where: { email } });
+  }
+  // ---------------------------------------------------------------------------
+  async findById(id: string): Promise<User> {
+    const user = await this.repository.findOne({
+      where: { id },
+    });
+
+    return user;
   }
 }

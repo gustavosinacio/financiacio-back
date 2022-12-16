@@ -5,12 +5,14 @@ import { ImportTransactionsUseCase } from './ImportTransactionsUseCase';
 
 export class ImportTransactionsController {
   async handle(req: Request, res: Response): Promise<Response> {
-    const { file } = req;
+    const { file, user } = req;
+
+    console.log(98210, user);
 
     const importTransactionsUseCase = container.resolve(
       ImportTransactionsUseCase,
     );
-    await importTransactionsUseCase.execute(file);
+    await importTransactionsUseCase.execute({ file, user });
 
     return res.send();
   }

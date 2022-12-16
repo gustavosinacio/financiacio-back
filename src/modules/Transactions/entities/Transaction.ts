@@ -1,5 +1,7 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, ManyToMany, ManyToOne, PrimaryColumn } from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
+
+import { User } from '../../Accounts/entities/User';
 
 @Entity('transactions')
 export class Transaction {
@@ -11,6 +13,9 @@ export class Transaction {
 
   @Column({ type: 'decimal', default: 0 })
   amount: number;
+
+  @ManyToOne(() => User, (user) => user.transactions)
+  user: User;
 
   @CreateDateColumn()
   createdAt: Date;

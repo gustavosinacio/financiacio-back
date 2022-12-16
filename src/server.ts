@@ -1,10 +1,12 @@
 import 'reflect-metadata';
-import './shared/container';
+import '@shared/container';
+import 'express-async-errors';
 
 import express, { NextFunction, Request, Response } from 'express';
 import { AppDataSource } from 'src/database';
 import swaggerUi from 'swagger-ui-express';
 
+import { AppError } from './errors/AppError';
 import { routes } from './routes';
 import swaggerSetup from './swagger.json';
 
@@ -27,6 +29,21 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 });
 
 app.use(routes);
+
+app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
+  console.log(error);
+
+  if (error instanceof AppError) {
+    return res.status(error.statusCode).json({
+      message: error.message,
+    });
+  }
+
+  return res.status(500).json({
+    status: 'error',
+    message: `Internal server error - ${error.message}`,
+  });
+});
 
 app.listen(port, () => {
   console.log(`---- Server running on port ${port} ----`);

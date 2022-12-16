@@ -1,11 +1,9 @@
 import { container } from 'tsyringe';
 
-import {
-    TransactionsRepository
-} from '@modules/Transactions/repositories/implementations/TransactionsRepository';
-import {
-    ITransactionsRepository
-} from '@modules/Transactions/repositories/ITransactionsRepository';
+import { UsersRepository } from '@modules/Accounts/repositories/implementations/UsersRepository';
+import { IUsersRepository } from '@modules/Accounts/repositories/IUsersRepository';
+import { TransactionsRepository } from '@modules/Transactions/repositories/implementations/TransactionsRepository';
+import { ITransactionsRepository } from '@modules/Transactions/repositories/ITransactionsRepository';
 
 /**
  * Using TSyringe, i'll create the dependecy injection for transactions
@@ -19,4 +17,8 @@ import {
 container.registerSingleton<ITransactionsRepository>(
   'TransactionsRepository',
   TransactionsRepository,
+);
+container.registerSingleton<IUsersRepository>(
+  'UsersRepository',
+  UsersRepository,
 );

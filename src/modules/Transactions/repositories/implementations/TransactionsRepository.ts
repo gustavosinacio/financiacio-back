@@ -13,12 +13,19 @@ export class TransactionsRepository implements ITransactionsRepository {
     this.repository = AppDataSource.getRepository(Transaction);
   }
   // ---------------------------------------------------------------------------
-  async create({ description, amount }: ICreateTransactionDTO): Promise<void> {
+  async create({
+    description,
+    amount,
+    user,
+  }: ICreateTransactionDTO): Promise<void> {
     const transaction = this.repository.create({
       id: uuidv4(),
       description,
       amount,
     });
+
+    transaction.user = user;
+
     await this.repository.save(transaction);
   }
   // ---------------------------------------------------------------------------
