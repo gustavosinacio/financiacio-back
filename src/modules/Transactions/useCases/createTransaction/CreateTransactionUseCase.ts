@@ -1,3 +1,5 @@
+import { inject, injectable } from 'tsyringe';
+
 import { ITransactionsRepository } from '../../repositories/ITransactionsRepository';
 
 interface ICreateTransactionRequest {
@@ -5,8 +7,12 @@ interface ICreateTransactionRequest {
   amount: number;
 }
 
+@injectable()
 export class CreateTransactionUseCase {
-  constructor(private transactionsRepository: ITransactionsRepository) {}
+  constructor(
+    @inject('TransactionsRepository')
+    private transactionsRepository: ITransactionsRepository,
+  ) {}
 
   async execute({
     description,

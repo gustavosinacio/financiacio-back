@@ -9,7 +9,7 @@ export class Transaction {
   @Column()
   description: string;
 
-  @Column()
+  @Column({ type: 'decimal', default: 0 })
   amount: number;
 
   @CreateDateColumn()

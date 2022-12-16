@@ -1,20 +1,35 @@
 import { Router } from 'express';
-import createTransactionController from '../modules/Transactions/useCases/createTransaction';
-import importTransactionsController from '../modules/Transactions/useCases/importTransactions';
-import listTransactionsController from '../modules/Transactions/useCases/listTransactions';
 import multer from 'multer';
+
+import {
+    CreateTransactionController
+} from '@modules/Transactions/useCases/createTransaction/CreateTransactionController';
+
+import {
+    ImportTransactionsController
+} from '../modules/Transactions/useCases/importTransactions/ImportTransactionsController';
+import {
+    ListTransactionsController
+} from '../modules/Transactions/useCases/listTransactions/ListTransactionsController';
 
 const router = Router();
 const upload = multer({
   dest: './tmp',
 });
 
-router.post('/', (req, res) => createTransactionController().handle(req, res));
+const createTransactionController = new CreateTransactionController();
+const listTransactionsController = new ListTransactionsController();
+const importTransactionsController = new ImportTransactionsController();
 
-router.get('/', (req, res) => listTransactionsController().handle(req, res));
+// Created with Tsyringe dependency injection
+router.post('/', createTransactionController.handle);
 
-router.post('/import', upload.single('file'), (req, res) =>
-  importTransactionsController().handle(req, res),
+router.get('/', listTransactionsController.handle);
+
+router.post(
+  '/import',
+  upload.single('file'),
+  importTransactionsController.handle,
 );
 
 export const transactionsRouter = router;

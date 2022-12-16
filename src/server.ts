@@ -1,7 +1,10 @@
+import 'reflect-metadata';
+import './shared/container';
+
 import express, { NextFunction, Request, Response } from 'express';
+import { AppDataSource } from 'src/database';
 import swaggerUi from 'swagger-ui-express';
 
-import { AppDataSource } from 'src/database';
 import { routes } from './routes';
 import swaggerSetup from './swagger.json';
 

@@ -1,5 +1,6 @@
-import fs from 'fs';
 import { parse } from 'csv-parse';
+import fs from 'fs';
+import { inject, injectable } from 'tsyringe';
 
 import { ITransactionsRepository } from '../../repositories/ITransactionsRepository';
 
@@ -10,8 +11,12 @@ interface IImportTransaction {
 
 const LINE_OFFSET = 1;
 
+@injectable()
 export class ImportTransactionsUseCase {
-  constructor(private transactionsRepository: ITransactionsRepository) {}
+  constructor(
+    @inject('TransactionsRepository')
+    private transactionsRepository: ITransactionsRepository,
+  ) {}
 
   loadTransactions(file: Express.Multer.File): Promise<IImportTransaction[]> {
     return new Promise((resolve, reject) => {
@@ -40,7 +45,7 @@ export class ImportTransactionsUseCase {
   async execute(file: Express.Multer.File): Promise<void> {
     const transactions = await this.loadTransactions(file);
 
-    transactions.forEach((transaction, lineNumber) => {
+    transactions.forEach(async (transaction, lineNumber) => {
       const { amount, description } = transaction;
 
       const parsedAmount = parseFloat(amount);
@@ -50,7 +55,10 @@ export class ImportTransactionsUseCase {
           `unable to parse amount on line ${lineNumber + LINE_OFFSET}`,
         );
       }
-      this.transactionsRepository.create({ amount: parsedAmount, description });
+      await this.transactionsRepository.create({
+        amount: parsedAmount,
+        description,
+      });
     });
   }
 }

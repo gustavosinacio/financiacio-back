@@ -1,16 +1,21 @@
 import { Request, Response } from 'express';
+import { container } from 'tsyringe';
+
+/**
+ * This use case has been created as injectable, so I can use it on
+ * container.resolve()
+ */
 import { CreateTransactionUseCase } from './CreateTransactionUseCase';
 
 export class CreateTransactionController {
-  constructor(private createTransactionUseCase: CreateTransactionUseCase) {}
-
   async handle(req: Request, res: Response): Promise<Response> {
     const { amount, description } = req.body;
 
-    await this.createTransactionUseCase.execute({
-      amount,
-      description,
-    });
+    const createTransactionUseCase = container.resolve(
+      CreateTransactionUseCase,
+    );
+
+    await createTransactionUseCase.execute({ amount, description });
 
     return res.status(201).send();
   }
