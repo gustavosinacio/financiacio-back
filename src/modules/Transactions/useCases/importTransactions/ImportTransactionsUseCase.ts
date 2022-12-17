@@ -1,10 +1,9 @@
 import { parse } from 'csv-parse';
 import fs from 'fs';
-import { AppError } from 'src/errors/AppError';
 import { inject, injectable } from 'tsyringe';
 
+import { AppError } from '@errors/AppError';
 import { User } from '@modules/Accounts/entities/User';
-import { IUsersRepository } from '@modules/Accounts/repositories/IUsersRepository';
 
 import { ITransactionsRepository } from '../../repositories/ITransactionsRepository';
 
@@ -25,9 +24,6 @@ export class ImportTransactionsUseCase {
   constructor(
     @inject('TransactionsRepository')
     private transactionsRepository: ITransactionsRepository,
-
-    @inject('UsersRepository')
-    private usersRepository: IUsersRepository,
   ) {}
 
   loadTransactions(file): Promise<IImportTransaction[]> {

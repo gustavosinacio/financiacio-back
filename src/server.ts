@@ -2,8 +2,8 @@ import 'reflect-metadata';
 import 'express-async-errors';
 import '@shared/container';
 
+import { AppDataSource } from 'database';
 import express, { NextFunction, Request, Response } from 'express';
-import { AppDataSource } from 'src/database';
 import swaggerUi from 'swagger-ui-express';
 
 import { AppError } from './errors/AppError';

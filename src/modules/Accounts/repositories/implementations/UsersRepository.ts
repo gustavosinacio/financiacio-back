@@ -1,4 +1,4 @@
-import { AppDataSource } from 'src/database';
+import { AppDataSource } from 'database';
 import { Repository } from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
 
