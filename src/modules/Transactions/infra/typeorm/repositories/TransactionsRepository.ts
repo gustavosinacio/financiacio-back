@@ -24,9 +24,8 @@ export class TransactionsRepository implements ITransactionsRepository {
       id: uuidv4(),
       description,
       amount,
+      user,
     });
-
-    transaction.user = user;
 
     await this.repository.save(transaction);
   }

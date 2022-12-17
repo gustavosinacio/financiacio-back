@@ -30,6 +30,7 @@ export async function checkAuthenticationToken(
       if (req.body) {
         req.body.user = user;
       }
+
       req.user = user;
     }
   } catch {

@@ -19,14 +19,4 @@ export class Transaction {
 
   @CreateDateColumn()
   createdAt: Date;
-
-  constructor(createTransacionData) {
-    if (createTransacionData === undefined) return;
-
-    const { description, amount } = createTransacionData;
-    if (!this.id) this.id = uuidv4();
-
-    this.description = description;
-    this.amount = amount;
-  }
 }
