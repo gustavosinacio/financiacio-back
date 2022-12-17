@@ -1,6 +1,6 @@
 import 'reflect-metadata';
-import '@shared/container';
 import 'express-async-errors';
+import '@shared/container';
 
 import express, { NextFunction, Request, Response } from 'express';
 import { AppDataSource } from 'src/database';
@@ -18,7 +18,7 @@ AppDataSource.initialize();
 app.use(express.json());
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSetup));
-app.get('/', (req: Request, res: Response, next: NextFunction) => {
+app.get('/', (req: Request, res: Response) => {
   console.log('*---* running');
   res.json({ message: 'financiacio api' });
 });
@@ -30,7 +30,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 
 app.use(routes);
 
-app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
+app.use((error: Error, req: Request, res: Response) => {
   console.log(error);
 
   if (error instanceof AppError) {

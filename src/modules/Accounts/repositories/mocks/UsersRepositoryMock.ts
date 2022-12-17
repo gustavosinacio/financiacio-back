@@ -26,12 +26,15 @@ export class UsersRepositoryMock implements IUsersRepository {
     return this.users;
   }
   async findByCPF(cpf: string): Promise<User> {
-    return this.users.find((user) => user.cpf === cpf);
+    const user = this.users.find((user) => user.cpf === cpf);
+    return user;
   }
   async findByEmail(email: string): Promise<User> {
-    return this.users.find((user) => user.email === email);
+    const user = this.users.find((user) => user.email === email);
+    return user;
   }
   async findById(id: string): Promise<User> {
-    return this.users.find((user) => user.id === id);
+    const user = this.users.find((user) => user.id === id);
+    return user;
   }
 }

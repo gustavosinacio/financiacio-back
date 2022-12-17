@@ -1,9 +1,12 @@
+import dotenv from 'dotenv';
 import { sign } from 'jsonwebtoken';
-import { AppError } from 'src/errors/AppError';
 import { inject, injectable } from 'tsyringe';
 
+import { AppError } from '@errors/AppError';
 import { User } from '@modules/Accounts/entities/User';
 import { IUsersRepository } from '@modules/Accounts/repositories/IUsersRepository';
+
+dotenv.config();
 
 interface IAuthenticateRequest {
   email: string;

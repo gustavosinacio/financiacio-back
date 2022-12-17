@@ -3,13 +3,13 @@ import multer from 'multer';
 
 import { checkAuthenticationToken } from '@middlewares/checkAuthenticationToken';
 import {
-    CreateTransactionController
+  CreateTransactionController
 } from '@modules/Transactions/useCases/createTransaction/CreateTransactionController';
 import {
-    ImportTransactionsController
+  ImportTransactionsController
 } from '@modules/Transactions/useCases/importTransactions/ImportTransactionsController';
 import {
-    ListTransactionsController
+  ListTransactionsController
 } from '@modules/Transactions/useCases/listTransactions/ListTransactionsController';
 
 const router = Router();

@@ -1,5 +1,6 @@
 namespace NodeJS {
   interface ProcessEnv {
+    JWT_SECRET: string;
     DB_TYPE: 'postgres';
     DB_HOST: string;
     DB_PORT: number;
