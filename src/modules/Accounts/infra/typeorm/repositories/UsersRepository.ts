@@ -1,10 +1,10 @@
-import { AppDataSource } from 'database';
 import { Repository } from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
 
-import { ICreateUserDTO } from '../../dtos/ICreateUserDto';
-import { User } from '../../entities/User';
-import { IUsersRepository } from '../IUsersRepository';
+import { ICreateUserDTO } from '@modules/Accounts/dtos';
+import { User } from '@modules/Accounts/infra/typeorm/entities/User';
+import { IUsersRepository } from '@modules/Accounts/repositories/IUsersRepository';
+import { AppDataSource } from '@shared/typeorm';
 
 export class UsersRepository implements IUsersRepository {
   /**

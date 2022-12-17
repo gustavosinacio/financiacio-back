@@ -1,5 +1,5 @@
-import { AppError } from '@errors/AppError';
 import { IUsersRepository } from '@modules/Accounts/repositories/IUsersRepository';
+import { AppError } from '@shared/errors/AppError';
 
 interface ICreateUserRequest {
   name: string;

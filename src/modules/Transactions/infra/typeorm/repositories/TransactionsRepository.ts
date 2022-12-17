@@ -1,10 +1,12 @@
-import { AppDataSource } from 'database';
 import { Repository } from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
 
-import { ICreateTransactionDTO } from '../../dtos';
-import { Transaction } from '../../entities/Transaction';
-import { ITransactionsRepository } from '../ITransactionsRepository';
+import { ICreateTransactionDTO } from '@modules/Transactions/dtos';
+import { Transaction } from '@modules/Transactions/infra/typeorm/entities/Transaction';
+import {
+    ITransactionsRepository
+} from '@modules/Transactions/repositories/ITransactionsRepository';
+import { AppDataSource } from '@shared/typeorm';
 
 export class TransactionsRepository implements ITransactionsRepository {
   private repository: Repository<Transaction>;

@@ -1,16 +1,16 @@
 import { Router } from 'express';
 import multer from 'multer';
 
-import { checkAuthenticationToken } from '@middlewares/checkAuthenticationToken';
 import {
-  CreateTransactionController
+    CreateTransactionController
 } from '@modules/Transactions/useCases/createTransaction/CreateTransactionController';
 import {
-  ImportTransactionsController
+    ImportTransactionsController
 } from '@modules/Transactions/useCases/importTransactions/ImportTransactionsController';
 import {
-  ListTransactionsController
+    ListTransactionsController
 } from '@modules/Transactions/useCases/listTransactions/ListTransactionsController';
+import { checkAuthenticationToken } from '@shared/infra/http/middlewares/checkAuthenticationToken';
 
 const router = Router();
 const upload = multer({

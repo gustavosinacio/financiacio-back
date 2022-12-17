@@ -1,6 +1,6 @@
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryColumn } from 'typeorm';
 
-import { Transaction } from '../../Transactions/entities/Transaction';
+import { Transaction } from '@modules/Transactions/infra/typeorm/entities/Transaction';
 
 @Entity('users')
 export class User {
@@ -12,23 +12,23 @@ export class User {
    * the database
    */
   //
-    id: string;
+  id: string;
 
   @Column()
-    name!: string;
+  name!: string;
 
   @Column()
-    email!: string;
+  email!: string;
 
   @Column({ length: 11 })
-    cpf!: string;
+  cpf!: string;
 
   @Column()
-    password: string;
+  password: string;
 
   @OneToMany(() => Transaction, (transaction) => transaction.user)
-    transactions: Transaction[];
+  transactions: Transaction[];
 
   @CreateDateColumn()
-    createdAt: Date;
+  createdAt: Date;
 }

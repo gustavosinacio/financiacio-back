@@ -2,10 +2,11 @@ import { parse } from 'csv-parse';
 import fs from 'fs';
 import { inject, injectable } from 'tsyringe';
 
-import { AppError } from '@errors/AppError';
-import { User } from '@modules/Accounts/entities/User';
-
-import { ITransactionsRepository } from '../../repositories/ITransactionsRepository';
+import { User } from '@modules/Accounts/infra/typeorm/entities/User';
+import {
+    ITransactionsRepository
+} from '@modules/Transactions/repositories/ITransactionsRepository';
+import { AppError } from '@shared/errors/AppError';
 
 interface IImportTransaction {
   description: string;

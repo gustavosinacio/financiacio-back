@@ -2,9 +2,9 @@ import dotenv from 'dotenv';
 import { sign } from 'jsonwebtoken';
 import { inject, injectable } from 'tsyringe';
 
-import { AppError } from '@errors/AppError';
-import { User } from '@modules/Accounts/entities/User';
+import { User } from '@modules/Accounts/infra/typeorm/entities/User';
 import { IUsersRepository } from '@modules/Accounts/repositories/IUsersRepository';
+import { AppError } from '@shared/errors/AppError';
 
 dotenv.config();
 

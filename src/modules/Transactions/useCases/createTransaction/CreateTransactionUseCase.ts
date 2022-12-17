@@ -1,8 +1,9 @@
 import { inject, injectable } from 'tsyringe';
 
-import { User } from '@modules/Accounts/entities/User';
-
-import { ITransactionsRepository } from '../../repositories/ITransactionsRepository';
+import { User } from '@modules/Accounts/infra/typeorm/entities/User';
+import {
+    ITransactionsRepository
+} from '@modules/Transactions/repositories/ITransactionsRepository';
 
 interface ICreateTransactionRequest {
   description: string;

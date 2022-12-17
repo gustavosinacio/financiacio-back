@@ -1,4 +1,4 @@
-import { User } from '@modules/Accounts/entities/User';
+import { User } from '@modules/Accounts/infra/typeorm/entities/User';
 
 export interface ICreateTransactionDTO {
   description: string;

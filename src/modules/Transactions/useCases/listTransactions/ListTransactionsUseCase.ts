@@ -1,7 +1,9 @@
 import { inject, injectable } from 'tsyringe';
 
-import { Transaction } from '../../entities/Transaction';
-import { ITransactionsRepository } from '../../repositories/ITransactionsRepository';
+import { Transaction } from '@modules/Transactions/infra/typeorm/entities/Transaction';
+import {
+    ITransactionsRepository
+} from '@modules/Transactions/repositories/ITransactionsRepository';
 
 @injectable()
 export class ListTransactionsUseCase {
