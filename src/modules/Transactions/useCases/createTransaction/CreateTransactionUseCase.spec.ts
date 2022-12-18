@@ -12,7 +12,7 @@ describe('Transaction creation', () => {
   let createUserUseCase: CreateUserUseCase;
   let createTransactionUseCase: CreateTransactionUseCase;
 
-  beforeAll(async () => {
+  beforeEach(async () => {
     usersRepositoryMock = new UsersRepositoryMock();
     transactionsRepositoryMock = new TransactionsRepositoryMock();
     createUserUseCase = new CreateUserUseCase(usersRepositoryMock);
