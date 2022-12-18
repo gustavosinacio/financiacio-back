@@ -11,7 +11,9 @@ describe('List all created users', () => {
   });
 
   it('Should list the right amount of users created', async () => {
-    for (let index = 0; index < 5; index++) {
+    const USERS_AMOUNT = 5;
+
+    for (let index = 0; index < USERS_AMOUNT; index++) {
       const email = `testemail${index}@email.com`;
       const name = `Test Name${index}`;
       const cpf = `0000000000${index}`;
@@ -27,6 +29,6 @@ describe('List all created users', () => {
 
     const allUsers = await usersRepositoryMock.list();
 
-    expect(allUsers.length).toBe(5);
+    expect(allUsers.length).toBe(USERS_AMOUNT);
   });
 });
