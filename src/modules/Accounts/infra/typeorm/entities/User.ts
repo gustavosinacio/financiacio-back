@@ -26,7 +26,9 @@ export class User {
   @Column()
   password: string;
 
-  @OneToMany(() => Transaction, (transaction) => transaction.user)
+  @OneToMany(() => Transaction, (transaction) => transaction.user, {
+    cascade: true,
+  })
   transactions: Transaction[];
 
   @CreateDateColumn()

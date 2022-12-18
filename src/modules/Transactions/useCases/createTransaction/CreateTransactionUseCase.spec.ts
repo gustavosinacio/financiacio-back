@@ -3,6 +3,7 @@ import { CreateUserUseCase } from '@modules/Accounts/useCases/createUser/CreateU
 import {
     TransactionsRepositoryMock
 } from '@modules/Transactions/repositories/mocks/TransactionsRepositoryMock';
+import { createMockTransaction } from '@shared/tests/functions/createMockTransaction';
 
 import { CreateTransactionUseCase } from './CreateTransactionUseCase';
 
@@ -30,13 +31,9 @@ describe('Transaction creation', () => {
   });
 
   it('should create a transaction linked to a user', async () => {
-    const users = await usersRepositoryMock.list();
+    const [user] = await usersRepositoryMock.list();
 
-    const transaction = {
-      amount: Math.random() * 1000,
-      description: 'random test description',
-      user: users[0],
-    };
+    const transaction = createMockTransaction(user);
 
     await createTransactionUseCase.execute(transaction);
 

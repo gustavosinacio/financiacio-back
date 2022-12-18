@@ -6,6 +6,7 @@ import {
 import {
     CreateTransactionUseCase
 } from '@modules/Transactions/useCases/createTransaction/CreateTransactionUseCase';
+import { createMockTransaction } from '@shared/tests/functions/createMockTransaction';
 
 describe('List all created transactions', () => {
   let usersRepositoryMock: UsersRepositoryMock;
@@ -35,11 +36,7 @@ describe('List all created transactions', () => {
 
     const [user] = await usersRepositoryMock.list();
 
-    const transaction = {
-      amount: Math.random() * 1000,
-      description: 'random test description',
-      user: user,
-    };
+    const transaction = createMockTransaction(user);
 
     for (let index = 0; index < TRANSACTIONS_AMOUNT; index++) {
       createTransactionUseCase.execute(transaction);

@@ -5,14 +5,18 @@ import { CreateTransactionUseCase } from './CreateTransactionUseCase';
 
 export class CreateTransactionController {
   async handle(req: Request, res: Response): Promise<Response> {
-    const { amount, description, user } = req.body;
-    console.log(98210, req.body.user);
+    const { amount, description, recurrent, user } = req.body;
 
     const createTransactionUseCase = container.resolve(
       CreateTransactionUseCase,
     );
 
-    await createTransactionUseCase.execute({ amount, description, user });
+    await createTransactionUseCase.execute({
+      amount,
+      description,
+      recurrent: recurrent || false,
+      user,
+    });
 
     return res.status(201).send();
   }

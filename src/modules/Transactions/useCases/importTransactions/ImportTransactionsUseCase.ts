@@ -11,6 +11,7 @@ import { AppError } from '@shared/errors/AppError';
 interface IImportTransaction {
   description: string;
   amount: string;
+  recurrent: boolean;
 }
 
 interface IImportTransactionsRequest {
@@ -37,9 +38,9 @@ export class ImportTransactionsUseCase {
 
       parser
         .on('data', (line) => {
-          const [description, amount] = line;
+          const [description, amount, recurrent] = line;
 
-          transactions.push({ description, amount });
+          transactions.push({ description, amount, recurrent });
         })
         .on('end', () => {
           fs.promises.unlink(file.path);
@@ -55,7 +56,7 @@ export class ImportTransactionsUseCase {
     const transactions = await this.loadTransactions(file);
 
     transactions.forEach(async (transaction, lineNumber) => {
-      const { amount, description } = transaction;
+      const { amount, description, recurrent } = transaction;
 
       const parsedAmount = parseFloat(amount);
 
@@ -67,6 +68,7 @@ export class ImportTransactionsUseCase {
       await this.transactionsRepository.create({
         amount: parsedAmount,
         description,
+        recurrent: recurrent || false,
         user,
       });
     });

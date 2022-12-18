@@ -21,7 +21,7 @@ export class CreateUserUseCase {
     const foundUserByEmail = await this.usersRepository.findByEmail(email);
 
     if (foundUserByCPF) {
-      throw new AppError('CPF already exists');
+      throw new AppError('CPF already exists', 303);
     }
     if (foundUserByEmail) {
       throw new AppError('Email already exists');

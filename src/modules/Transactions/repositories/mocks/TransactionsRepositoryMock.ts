@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 
-import { ICreateTransactionDTO } from '@modules/Transactions/dtos';
+import { ICreateTransactionDTO } from '@modules/Transactions/dtos/ICreateTransactionDTO';
 import { Transaction } from '@modules/Transactions/infra/typeorm/entities/Transaction';
 
 import { ITransactionsRepository } from '../ITransactionsRepository';
@@ -16,6 +16,7 @@ export class TransactionsRepositoryMock implements ITransactionsRepository {
     description,
     amount,
     user,
+    recurrent,
   }: ICreateTransactionDTO): Promise<void> {
     const transaction = new Transaction();
 
@@ -23,6 +24,7 @@ export class TransactionsRepositoryMock implements ITransactionsRepository {
       id: uuidv4(),
       amount,
       description,
+      recurrent,
       createdAt: new Date(),
       user,
     });

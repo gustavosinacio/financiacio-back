@@ -1,5 +1,4 @@
 import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryColumn } from 'typeorm';
-import { v4 as uuidv4 } from 'uuid';
 
 import { User } from '@modules/Accounts/infra/typeorm/entities/User';
 
@@ -13,6 +12,9 @@ export class Transaction {
 
   @Column({ type: 'decimal', default: 0 })
   amount: number;
+
+  @Column()
+  recurrent: boolean;
 
   @ManyToOne(() => User, (user) => user.transactions)
   user: User;

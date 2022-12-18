@@ -8,6 +8,7 @@ import {
 interface ICreateTransactionRequest {
   description: string;
   amount: number;
+  recurrent: boolean;
   user: User;
 }
 
@@ -25,11 +26,13 @@ export class CreateTransactionUseCase {
   async execute({
     description,
     amount,
+    recurrent,
     user,
   }: ICreateTransactionRequest): Promise<void> {
     await this.transactionsRepository.create({
       description,
       amount,
+      recurrent,
       user,
     });
   }

@@ -1,9 +1,9 @@
 import 'reflect-metadata';
-import 'express-async-errors';
 import '@shared/container';
 
 import express, { NextFunction, Request, Response } from 'express';
 import swaggerUi from 'swagger-ui-express';
+import 'express-async-errors';
 
 import { AppError } from '@shared/errors/AppError';
 import { routes } from '@shared/routes';
@@ -31,9 +31,8 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 
 app.use(routes);
 
+// Error handling
 app.use((error: Error, req: Request, res: Response) => {
-  console.log(error);
-
   if (error instanceof AppError) {
     return res.status(error.statusCode).json({
       message: error.message,
