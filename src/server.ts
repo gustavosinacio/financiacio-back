@@ -12,7 +12,7 @@ import { AppDataSource } from '@shared/typeorm';
 import swaggerSetup from './swagger.json';
 
 const app = express();
-const port = 3333;
+const port = process.env.PORT;
 
 AppDataSource.initialize();
 
