@@ -2,8 +2,8 @@ import 'reflect-metadata';
 import '@shared/container';
 
 import express, { NextFunction, Request, Response } from 'express';
-import swaggerUi from 'swagger-ui-express';
 import 'express-async-errors';
+import swaggerUi from 'swagger-ui-express';
 
 import { AppError } from '@shared/errors/AppError';
 import { routes } from '@shared/routes';
@@ -20,7 +20,6 @@ app.use(express.json());
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSetup));
 app.get('/', (req: Request, res: Response) => {
-  console.log('*---* running');
   res.json({ message: 'financiacio api' });
 });
 

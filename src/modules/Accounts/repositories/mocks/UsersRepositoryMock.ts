@@ -20,6 +20,7 @@ export class UsersRepositoryMock implements IUsersRepository {
     });
 
     this.users.push(user);
+    // console.log(await this.list());
   }
   async list(): Promise<User[]> {
     return this.users;

@@ -48,5 +48,3 @@ This was implemented in two ways, the first one being by hand in the use cases r
 The second one was by using **tsyringe** to inject all other repositories and useCases.
 
 This was also represent in the folder structure, were folders like **infra/typeorm** were created to represent the implementation based on typeorm's format
-
-[] add date delimiter endpoint
